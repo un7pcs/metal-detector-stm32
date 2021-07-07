@@ -28,6 +28,9 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
+#include "stm32f1xx_ll_adc.h"
+#include "stm32f1xx_ll_dma.h"
+#include "stm32f1xx_ll_i2c.h"
 #include "stm32f1xx_ll_rcc.h"
 #include "stm32f1xx_ll_bus.h"
 #include "stm32f1xx_ll_system.h"
@@ -35,7 +38,7 @@ extern "C" {
 #include "stm32f1xx_ll_cortex.h"
 #include "stm32f1xx_ll_utils.h"
 #include "stm32f1xx_ll_pwr.h"
-#include "stm32f1xx_ll_dma.h"
+#include "stm32f1xx_ll_tim.h"
 #include "stm32f1xx_ll_gpio.h"
 
 #if defined(USE_FULL_ASSERT)
@@ -66,10 +69,16 @@ extern "C" {
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
-
+void main_task();
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define ECHO_IN_Pin LL_GPIO_PIN_0
+#define ECHO_IN_GPIO_Port GPIOA
+#define ADC_PULSE_Pin LL_GPIO_PIN_6
+#define ADC_PULSE_GPIO_Port GPIOA
+#define COIL_PULSE_Pin LL_GPIO_PIN_8
+#define COIL_PULSE_GPIO_Port GPIOA
 #ifndef NVIC_PRIORITYGROUP_0
 #define NVIC_PRIORITYGROUP_0         ((uint32_t)0x00000007) /*!< 0 bit  for pre-emption priority,
                                                                  4 bits for subpriority */
